@@ -42,13 +42,13 @@ After that you can give it a go like so using either my sample repo or one of yo
 ### Running with defaults
 
 ```bash
-docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN -e PROJECT_PATH='genebean/dependabot-test-control-repo' -it --rm genebean/dependabot-control-repo-demo
+docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN -e PROJECT_PATH='genebean/dependabot-test-control-repo' --rm genebean/dependabot-control-repo-demo
 ```
 
 ### Running just for a Puppetfile
 
 ```bash
-docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN -e PACKAGE_MANAGER='puppet' -e PROJECT_PATH='genebean/dependabot-test-control-repo' -it --rm genebean/dependabot-control-repo-demo
+docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN -e PACKAGE_MANAGER='puppet' -e PROJECT_PATH='genebean/dependabot-test-control-repo' --rm genebean/dependabot-control-repo-demo
 ```
 
 ### Running with other checks
