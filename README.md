@@ -2,6 +2,8 @@
 
 This repo demonstrates using [Dependabot](https://dependabot.com) with a [Puppet](https://puppet.com/) control repository. It analyzes both the Gemfile and the Puppetfile and submits pull requests for any entries in either that are out of date.
 
+The sample control repository referenced below can be seen here: https://github.com/genebean/dependabot-test-control-repo/pulls
+
 ## Prep
 
 First you will have to build a variation of Dependabot's [Dockerfile.ci](https://github.com/dependabot/dependabot-core/blob/master/Dockerfile.ci) file that includes the code from [PR 1287](https://github.com/dependabot/dependabot-core/pull/1287). The steps to do that are:
