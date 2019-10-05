@@ -59,7 +59,7 @@ The `PACKAGE_MANAGER` environment variable is a comma-separated list that defaul
 
 If, like me, you'd prefer to not run all this locally on your laptop then this is the section for you! This repo contains a Vagrantfile that preps everything so that all you have to do is run it against your repository. Just run `vagrant up` from inside this directory to build everything. When it finishes run `vagrant ssh` and then follow the usage directions above.
 
-## Expected output
+### Expected output
 
 Here is a sample of the output when run in Vagrant:
 
