@@ -4,6 +4,15 @@ This repo demonstrates using [Dependabot](https://dependabot.com) with a [Puppet
 
 The sample control repository referenced below can be seen here: https://github.com/genebean/dependabot-test-control-repo/pulls
 
+- [Prep](#prep)
+- [Usage](#usage)
+  - [Running with defaults](#running-with-defaults)
+  - [Running just for a Puppetfile](#running-just-for-a-puppetfile)
+  - [Running with other checks](#running-with-other-checks)
+- [Vagrant](#vagrant)
+  - [Expected output](#expected-output)
+- [Alternate Usage: dry-run](#alternate-usage-dry-run)
+
 ## Prep
 
 First you will have to build a variation of Dependabot's [Dockerfile.ci](https://github.com/dependabot/dependabot-core/blob/master/Dockerfile.ci) file that includes the code from [PR 1287](https://github.com/dependabot/dependabot-core/pull/1287). The steps to do that are:
