@@ -4,6 +4,15 @@ This repo demonstrates using [Dependabot](https://dependabot.com) with a [Puppet
 
 The sample control repository referenced below can be seen here: https://github.com/genebean/dependabot-test-control-repo/pulls
 
+- [Prep](#prep)
+- [Usage](#usage)
+  - [Running with defaults](#running-with-defaults)
+  - [Running just for a Puppetfile](#running-just-for-a-puppetfile)
+  - [Running with other checks](#running-with-other-checks)
+- [Vagrant](#vagrant)
+  - [Expected output](#expected-output)
+- [Alternate Usage: dry-run](#alternate-usage-dry-run)
+
 ## Prep
 
 First you will have to build a variation of Dependabot's [Dockerfile.ci](https://github.com/dependabot/dependabot-core/blob/master/Dockerfile.ci) file that includes the code from [PR 1287](https://github.com/dependabot/dependabot-core/pull/1287). The steps to do that are:
@@ -42,13 +51,13 @@ After that you can give it a go like so using either my sample repo or one of yo
 ### Running with defaults
 
 ```bash
-docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN -e PROJECT_PATH='genebean/dependabot-test-control-repo' -it --rm genebean/dependabot-control-repo-demo
+docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN -e PROJECT_PATH='genebean/dependabot-test-control-repo' --rm genebean/dependabot-control-repo-demo
 ```
 
 ### Running just for a Puppetfile
 
 ```bash
-docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN -e PACKAGE_MANAGER='puppet' -e PROJECT_PATH='genebean/dependabot-test-control-repo' -it --rm genebean/dependabot-control-repo-demo
+docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN -e PACKAGE_MANAGER='puppet' -e PROJECT_PATH='genebean/dependabot-test-control-repo' --rm genebean/dependabot-control-repo-demo
 ```
 
 ### Running with other checks
@@ -59,7 +68,7 @@ The `PACKAGE_MANAGER` environment variable is a comma-separated list that defaul
 
 If, like me, you'd prefer to not run all this locally on your laptop then this is the section for you! This repo contains a Vagrantfile that preps everything so that all you have to do is run it against your repository. Just run `vagrant up` from inside this directory to build everything. When it finishes run `vagrant ssh` and then follow the usage directions above.
 
-## Expected output
+### Expected output
 
 Here is a sample of the output when run in Vagrant:
 
@@ -93,4 +102,20 @@ Parsing dependencies information
   - Updating stm-debconf (from 2.3.0)… submitted
   - Updating saz-timezone (from 5.0.2)… submitted
 Done
+```
+
+## Alternate Usage: dry-run
+
+If you'd rather just see what would happen instead of actually creating pull requests then this is the section for you.
+
+The `genebean/dependabot-ci` container from earlier includes a script called `dry-run.rb` that takes two parameters: a package manager and a repository to check. It then runs through all the checks and prints what would have been done. Below is how to use this script on our sample control repository.
+
+```bash
+~ » read -s LOCAL_GITHUB_ACCESS_TOKEN
+
+# Check the Gemfile
+~ » docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN --rm genebean/dependabot-ci bin/dry-run.rb bundler genebean/dependabot-test-control-repo
+
+# Check the Puppetfile
+~ » docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN --rm genebean/dependabot-ci bin/dry-run.rb puppet genebean/dependabot-test-control-repo
 ```
