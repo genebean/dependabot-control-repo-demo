@@ -94,3 +94,19 @@ Parsing dependencies information
   - Updating saz-timezone (from 5.0.2)… submitted
 Done
 ```
+
+## Alternate Usage: dry-run
+
+If you'd rather just see what would happen instead of actually creating pull requests then this is the section for you.
+
+The `genebean/dependabot-ci` container from earlier includes a script called `dry-run.rb` that takes two parameters: a package manager and a repository to check. It then runs through all the checks and prints what would have been done. Below is how to use this script on our sample control repository.
+
+```bash
+~ » read -s LOCAL_GITHUB_ACCESS_TOKEN
+
+# Check the Gemfile
+~ » docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN --rm genebean/dependabot-ci bin/dry-run.rb bundler genebean/dependabot-test-control-repo
+
+# Check the Puppetfile
+~ » docker run -e LOCAL_GITHUB_ACCESS_TOKEN=$LOCAL_GITHUB_ACCESS_TOKEN --rm genebean/dependabot-ci bin/dry-run.rb puppet genebean/dependabot-test-control-repo
+```
